@@ -1,5 +1,5 @@
 var express = require('express'),
-    routes = require('./routes'),
+    routes = require('./app/routes'),
     http = require('http'),
     path = require('path');
 
@@ -7,17 +7,24 @@ var app = express();
 
 app.configure(function(){
   app.set('port', process.env.PORT || 3000);
-  app.set('views', __dirname + '/views');
+  app.set('views', __dirname + '/app/views');
   app.set('view engine', 'jade');
   app.use(express.logger('dev'));
   app.use(express.methodOverride());
   app.use(app.router);
   app.use(express.static(path.join(__dirname, 'public')));
-  app.use(require('readymade').middleware({root: ''}));
 });
 
 app.configure('development', function(){
   app.use(express.errorHandler());
+
+  var cp = require('child_process');
+  //spawn node child process to start grunt build and watch processes
+  var grunt = cp.spawn('grunt', ['--force', 'default']);
+  grunt.stdout.on('data', function(data) {
+      // relay output to console
+      console.log("%s", data);
+  });
 });
 
 app.get('/', routes.index);
