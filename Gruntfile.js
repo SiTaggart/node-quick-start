@@ -2,6 +2,14 @@ module.exports = function( grunt ) {
 
   grunt.initConfig({
 
+    bower: {
+      install: {
+        targetDir: './public/libs',
+        cleanup: true,
+        install: true
+      }
+    },
+
     // compile .scss/.sass to .css using Compass
     compass: {
       dist: {
@@ -66,5 +74,8 @@ module.exports = function( grunt ) {
   grunt.loadNpmTasks('grunt-contrib-compass');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.registerTask('default', ['watch', 'compass', 'jshint']);
+  grunt.loadNpmTasks('grunt-bower-task');
+  grunt.registerTask('default', ['compass', 'jshint', 'watch']);
+
+  //grunt bower:install to move and collect dependencies
 };
