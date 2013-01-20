@@ -4,9 +4,11 @@ module.exports = function( grunt ) {
 
     bower: {
       install: {
-        targetDir: './public/libs',
-        cleanup: true,
-        install: true
+        options:{
+          targetDir: './public/libs',
+          cleanup: true,
+          install: true
+        }
       }
     },
 
@@ -41,8 +43,8 @@ module.exports = function( grunt ) {
       }
     },
 
-    // // default lint configuration, change this to match your setup:
-    // // https://github.com/cowboy/grunt/blob/master/docs/task_lint.md#lint-built-in-task
+    // default lint configuration, change this to match your setup:
+    // https://github.com/cowboy/grunt/blob/master/docs/task_lint.md#lint-built-in-task
     lint: {
       files: [
         'Gruntfile.js',
@@ -71,11 +73,18 @@ module.exports = function( grunt ) {
       }
     }
   });
+
+
+  //Load the npm tasks
   grunt.loadNpmTasks('grunt-contrib-compass');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-bower-task');
+
+  // Default grunt task to be run by node when the app starts in dev
   grunt.registerTask('default', ['compass', 'jshint', 'watch']);
 
-  //grunt bower:install to move and collect dependencies
+  //To install an update components run $ grunt setapp
+  grunt.registerTask('setapp', ['bower']);
+
 };
