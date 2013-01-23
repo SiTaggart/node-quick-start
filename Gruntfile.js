@@ -12,6 +12,24 @@ module.exports = function( grunt ) {
       }
     },
 
+    requirejs: {
+      compile: {
+        options: {
+          baseUrl: "app/scripts",
+          mainConfigFile: "app/scripts/config.js",
+          out: "public/scripts/main.js",
+          name: "main",
+          inlineText: false,
+          optimize: "none",
+          uglify: {
+              //toplevel: true,
+              //ascii_only: true,
+              //beautify: true
+          }
+        }
+      }
+    },
+
     // compile .scss/.sass to .css using Compass
     compass: {
       dist: {
@@ -39,17 +57,8 @@ module.exports = function( grunt ) {
         files: [
           'app/scripts/**/*.js'
         ],
-        tasks: ['jshint']
+        tasks: ['jshint', 'requirejs']
       }
-    },
-
-    // default lint configuration, change this to match your setup:
-    // https://github.com/cowboy/grunt/blob/master/docs/task_lint.md#lint-built-in-task
-    lint: {
-      files: [
-        'Gruntfile.js',
-        'app/scripts/**/*.js'
-      ]
     },
 
     // // specifying JSHint options and globals
@@ -89,9 +98,10 @@ module.exports = function( grunt ) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-bower-task');
+  grunt.loadNpmTasks('grunt-contrib-requirejs');
 
   // Default grunt task to be run by node when the app starts in dev
-  grunt.registerTask('default', ['compass', 'jshint', 'watch']);
+  grunt.registerTask('default', ['compass', 'jshint', 'requirejs', 'watch']);
 
   //To install an update components run $ grunt setapp
   grunt.registerTask('setapp', ['bower']);

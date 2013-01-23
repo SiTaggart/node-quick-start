@@ -4,3 +4,4 @@ components/
 .sass-cache/
 public/css/*
 public/libs/*
+public/scripts/*

@@ -10,6 +10,7 @@
     "grunt-contrib-jshint": "~0.1.0",
     "grunt-contrib-compass": "~0.1.0",
     "grunt-contrib-watch": "~0.1.4",
-    "grunt-bower-task": "~0.1.0"
+    "grunt-bower-task": "~0.1.0",
+    "grunt-contrib-requirejs": "~0.3.4"
   }
 }
