@@ -15,7 +15,7 @@ function(Backbone, app) {
     },
 
     index: function() {
-      alert('Hello mum');
+
     }
   });
 

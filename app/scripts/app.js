@@ -18,7 +18,7 @@ function($, _, Backbone) {
   // Localize or create a new JavaScript Template object.
   var JST = window.JST = window.JST || {};
 
-  // Mix Backbone.Events, modules, and layout management into the app object.
+  // Mix layout management into the app object.
   return _.extend(app, {
     fetchTemplate: function(path) {
       path = path + ".html";
