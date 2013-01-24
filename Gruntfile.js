@@ -2,6 +2,7 @@ module.exports = function( grunt ) {
 
   grunt.initConfig({
 
+    //Grab your frontend bower components
     bower: {
       install: {
         options:{
@@ -12,6 +13,7 @@ module.exports = function( grunt ) {
       }
     },
 
+    //Package js into one file using the excellent require
     requirejs: {
       compile: {
         options: {
@@ -39,25 +41,9 @@ module.exports = function( grunt ) {
           sassDir: 'app/styles',
           imagesDir: 'public/images',
           javascriptsDir: 'public/scripts',
-          outputStyle: 'compressed',
+          outputStyle: 'expanded',
           force: true
         }
-      }
-    },
-
-    // default watch configuration
-    watch: {
-      compass: {
-        files: [
-          'app/styles/**/*.{scss,sass}'
-        ],
-        tasks: ['compass']
-      },
-      jshint: {
-        files: [
-          'app/scripts/**/*.js'
-        ],
-        tasks: ['jshint', 'requirejs']
       }
     },
 
@@ -89,6 +75,40 @@ module.exports = function( grunt ) {
         'Gruntfile.js',
         'app/scripts/**/*.js'
       ]
+    },
+
+    // default watch configuration
+    watch: {
+      compass: {
+        files: [
+          'app/styles/**/*.{scss,sass}'
+        ],
+        tasks: ['compass']
+      },
+      jshint: {
+        files: [
+          'app/scripts/**/*.js'
+        ],
+        tasks: ['jshint', 'requirejs']
+      }
+    },
+
+    //production ready
+    uglify: {
+      options: {
+      },
+      my_target: {
+        files: {
+          'public/scripts/main.js': ['public/scripts/main.js']
+        }
+      }
+    },
+    mincss: {
+      compress: {
+        files: {
+          'public/css/main.css': ['public/css/*.css']
+        }
+      }
     }
   });
 
@@ -99,11 +119,16 @@ module.exports = function( grunt ) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-bower-task');
   grunt.loadNpmTasks('grunt-contrib-requirejs');
+  grunt.loadNpmTasks('grunt-contrib-mincss');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
 
   // Default grunt task to be run by node when the app starts in dev
   grunt.registerTask('default', ['compass', 'jshint', 'requirejs', 'watch']);
 
-  //To install an update components run $ grunt setapp
+  //To install and update components run $ grunt setapp
   grunt.registerTask('setapp', ['bower']);
+
+  //Ready app for production
+  grunt.registerTask('production', ['compass','requirejs', 'uglify', 'mincss']);
 
 };
