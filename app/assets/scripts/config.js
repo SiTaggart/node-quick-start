@@ -6,13 +6,13 @@ require.config({
 
   paths: {
     // JavaScript folders.
-    libs: "../../public/libs/js",
+    libs: "../../../public/libs/js",
     plugins: "plugins",
 
     // Libraries.
-    jquery: "../../public/libs/js/jquery/jquery.min",
-    lodash: "../../public/libs/js/lodash/lodash.min",
-    backbone: "../../public/libs/js/backbone/backbone-min"
+    jquery: "../../../public/libs/js/jquery/jquery.min",
+    lodash: "../../../public/libs/js/lodash/lodash.min",
+    backbone: "../../../public/libs/js/backbone/backbone-min"
   },
 
   shim: {
